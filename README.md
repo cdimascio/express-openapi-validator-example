@@ -3,6 +3,7 @@
 ## Usage
 
 ```shell
+# clone this repo, then run
 npm start
 ```
 
