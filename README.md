@@ -6,10 +6,14 @@
 npm start
 ```
 
-Test the validator
+## Try it
+
+The following examples submit invalid response. [express-middleware-openapi](https://github.com/cdimascio/express-middleware-openapi) automatically validates the request given an openapi specification. In this case it uses [this spec](openapi.yaml)
+
+### Validate a query parameter with a value constraint
 
 ```shell
-λ  my-test curl http://localhost:3000/v1/pets/as |jq
+curl http://localhost:3000/v1/pets/as |jq
 {
   "errors": [
     {
@@ -22,10 +26,11 @@ Test the validator
 }
 ```
 
+### Validate a query parameter with a range constraint
+
 ```shell
-
-
-λ  my-test curl http://localhost:3000/v1/pets?limit=1 |jq
+curl http://localhost:3000/v1/pets?limit=1 |jq
+{
   "errors": [
     {
       "path": "limit",
@@ -43,8 +48,10 @@ Test the validator
 }
 ```
 
+### Validate the query parameter's value type
+
 ```shell
-λ  my-test curl --request POST \
+curl --request POST \
   --url http://localhost:3000/v1/pets \
   --header 'content-type: application/xml' \
   --data '{
@@ -58,6 +65,8 @@ Test the validator
   ]
 }
 ```
+
+### Validate a POST body to ensure required parameters are present
 
 ```shell
 λ  my-test curl --request POST \
@@ -75,3 +84,5 @@ Test the validator
   ]
 }
 ```
+
+### ...and much more. Try it out!
