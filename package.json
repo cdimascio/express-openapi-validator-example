@@ -14,7 +14,7 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
-    "express-middleware-openapi": "^0.1.12-alpha",
+    "express-middleware-openapi": "^0.1.21-alpha",
     "morgan": "^1.9.1"
   }
 }
