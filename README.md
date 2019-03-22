@@ -2,8 +2,19 @@
 
 ## Usage
 
+Setup: Install dependencies
+
 ```shell
 # clone this repo, then run
+npm install
+
+# openapi middleware is under active development, run the following to get the latest
+npm uninstall express-middleware-openapi && npm install express-middleware-openapi
+```
+
+Start the Api server
+
+```shell
 npm start
 ```
 
