@@ -20,7 +20,7 @@ npm start
 
 ## Try it
 
-The following examples submit invalid response. [express-middleware-openapi](https://github.com/cdimascio/express-middleware-openapi) automatically validates the request given an openapi specification. In this case it uses [this spec](openapi.yaml)
+Try the following requests. See [express-openapi-validator](https://github.com/cdimascio/express-openapi-validator) automatically validates the request against this [openapi 3 spec](openapi.yaml) and return an appropriate response!
 
 ### Validate a query parameter with a value constraint
 
@@ -98,3 +98,7 @@ curl --request POST \
 ```
 
 ### ...and much more. Try it out!
+
+## Fetch the spec
+
+curl http://localhost:3000/spec
