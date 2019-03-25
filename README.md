@@ -1,4 +1,4 @@
-# express-middleware-openapi-example
+# express-openapi-validator-example
 
 ## Usage
 
