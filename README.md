@@ -5,11 +5,11 @@
 Setup: Install dependencies
 
 ```shell
-# clone this repo, then run
-npm install
+# 1. clone this repo
+git clone https://github.com/cdimascio/express-openapi-validator-example
 
-# openapi middleware is under active development, run the following to get the latest
-npm uninstall express-middleware-openapi && npm install express-middleware-openapi
+# 2. install dependencies
+npm install
 ```
 
 Start the Api server
@@ -20,7 +20,9 @@ npm start
 
 ## Try it
 
-Try the following requests. See [express-openapi-validator](https://github.com/cdimascio/express-openapi-validator) automatically validates the request against this [openapi 3 spec](openapi.yaml) and return an appropriate response!
+Try the out the following requests.
+
+The [express-openapi-validator](https://github.com/cdimascio/express-openapi-validator) automatically validates each request against an [openapi 3 specification](openapi.yaml). If a request is does not match the spec, [express-openapi-validator](https://github.com/cdimascio/express-openapi-validator) automatically returns an appropriate error response.
 
 ### Validate a query parameter with a value constraint
 
