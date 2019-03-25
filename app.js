@@ -16,10 +16,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 const spec = path.join(__dirname, 'openapi.yaml');
 app.use('/spec', express.static(spec));
 
+// 1. Install the OpenApiValidator on your express app
 new OpenApiValidator({
   apiSpecPath: './openapi.yaml',
 }).install(app);
 
+// 2. Add routes
 app.get('/v1/pets', function(req, res, next) {
   res.json([{ id: 1, name: 'max' }, { id: 2, name: 'mini' }]);
 });
@@ -32,7 +34,7 @@ app.get('/v1/pets/:id', function(req, res, next) {
   res.json({ id: req.params.id, name: 'sparky' });
 });
 
-// Register error handler
+// 3. Create a custom error handler
 app.use((err, req, res, next) => {
   // format error
   res.status(err.status).json({
