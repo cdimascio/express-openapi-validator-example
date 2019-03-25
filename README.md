@@ -1,8 +1,8 @@
 # express-openapi-validator-example
 
-## Usage
+Provides a simple example demonstrating how [express-openapi-validator](https://github.com/cdimascio/express-openapi-validator) can be used to automatically validate api requests.
 
-Setup: Install dependencies
+## Setup the example project
 
 ```shell
 # 1. clone this repo
@@ -11,6 +11,8 @@ git clone https://github.com/cdimascio/express-openapi-validator-example
 # 2. install dependencies
 npm install
 ```
+
+## Run it
 
 Start the Api server
 
