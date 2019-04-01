@@ -1,5 +1,5 @@
 {
-  "name": "express-openapi-validator",
+  "name": "express-openapi-validator-example",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,7 +14,7 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
-    "express-openapi-validator": "^0.3.33-beta",
+    "express-openapi-validator": "^0.3.36",
     "morgan": "^1.9.1"
   }
 }
