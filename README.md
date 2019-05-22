@@ -101,6 +101,11 @@ curl --request POST \
 }
 ```
 
+File upload
+```shell
+curl -XPOST http://localhost:3000/files -F file=@hello.txt
+```
+
 ### ...and much more. Try it out!
 
 ## Fetch the spec

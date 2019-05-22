@@ -5,6 +5,9 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var http = require('http');
 var OpenApiValidator = require('express-openapi-validator').OpenApiValidator;
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -20,6 +23,17 @@ app.use('/spec', express.static(spec));
 new OpenApiValidator({
   apiSpecPath: './openapi.yaml',
 }).install(app);
+
+app.post('/v1/pets/:id/photos', upload.single('file'), function(
+  req,
+  res,
+  next
+) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  console.log(req.file);
+  res.status(200).end();
+});
 
 // 2. Add routes
 app.get('/v1/pets', function(req, res, next) {
@@ -37,9 +51,19 @@ app.get('/v1/pets/:id', function(req, res, next) {
 // 3. Create a custom error handler
 app.use((err, req, res, next) => {
   // format error
-  res.status(err.status).json({
-    errors: err.errors,
-  });
+  if (!err.status && !err.errors) {
+    res.status(500).json({
+      errors: [
+        {
+          message: err.message,
+        },
+      ],
+    });
+  } else {
+    res.status(err.status).json({
+      errors: err.errors,
+    });
+  }
 });
 
 var server = http.createServer(app);
