@@ -103,7 +103,16 @@ curl --request POST \
 
 File upload
 ```shell
-curl -XPOST http://localhost:3000/files -F file=@hello.txt
+curl -XPOST http://localhost:3000/v1/pets/10/photos -F file=@app.js|jq
+{
+  "files_metadata": [
+    {
+      "originalname": "app.js",
+      "encoding": "7bit",
+      "mimetype": "application/octet-stream"
+    }
+  ]
+}
 ```
 
 ### ...and much more. Try it out!

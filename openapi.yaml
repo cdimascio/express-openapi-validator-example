@@ -149,7 +149,10 @@ paths:
         content:
           multipart/form-data:
             schema:
+              # $ref: '#/components/schemas/NewPhoto'
               type: object
+              required: 
+                - file
               properties:
                 file:
                   description: The photo
@@ -187,6 +190,17 @@ components:
             id:
               type: integer
               format: int64
+              
+    NewPhoto:
+      type: object
+      required: 
+        - file
+      properties:
+        file:
+          description: The photo
+          type: string
+          format: binary
+
 
     Error:
       required:

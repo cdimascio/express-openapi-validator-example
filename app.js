@@ -5,11 +5,9 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var http = require('http');
 var OpenApiValidator = require('express-openapi-validator').OpenApiValidator;
-var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
-
 var app = express();
 
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
@@ -24,15 +22,19 @@ new OpenApiValidator({
   apiSpecPath: './openapi.yaml',
 }).install(app);
 
-app.post('/v1/pets/:id/photos', upload.single('file'), function(
-  req,
-  res,
-  next
-) {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-  console.log(req.file);
-  res.status(200).end();
+app.post('/v1/pets/:id/photos', function(req, res, next) {
+  // DO something with the file
+  // files are found in req.files
+  // non file multipar params are in req.body['my-param']
+  console.log(req.files);
+
+  res.json({
+    files_metadata: req.files.map(f => ({
+      originalname: f.originalname,
+      encoding: f.encoding,
+      mimetype: f.mimetype,
+    })),
+  });
 });
 
 // 2. Add routes
