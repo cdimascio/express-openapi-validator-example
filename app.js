@@ -47,6 +47,8 @@ app.post('/v1/pets/:id/photos', function(req, res, next) {
       originalname: f.originalname,
       encoding: f.encoding,
       mimetype: f.mimetype,
+      // Buffer of file conents
+      // buffer: f.buffer,
     })),
   });
 });
