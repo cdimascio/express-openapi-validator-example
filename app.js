@@ -22,6 +22,20 @@ new OpenApiValidator({
   apiSpecPath: './openapi.yaml',
 }).install(app);
 
+// 2. Add routes
+app.get('/v1/pets', function(req, res, next) {
+  res.json([{ id: 1, name: 'max' }, { id: 2, name: 'mini' }]);
+});
+
+app.post('/v1/pets', function(req, res, next) {
+  res.json({ name: 'sparky' });
+});
+
+app.get('/v1/pets/:id', function(req, res, next) {
+  res.json({ id: req.params.id, name: 'sparky' });
+});
+
+// 2a. Add a route upload file(s)
 app.post('/v1/pets/:id/photos', function(req, res, next) {
   // DO something with the file
   // files are found in req.files
@@ -35,19 +49,6 @@ app.post('/v1/pets/:id/photos', function(req, res, next) {
       mimetype: f.mimetype,
     })),
   });
-});
-
-// 2. Add routes
-app.get('/v1/pets', function(req, res, next) {
-  res.json([{ id: 1, name: 'max' }, { id: 2, name: 'mini' }]);
-});
-
-app.post('/v1/pets', function(req, res, next) {
-  res.json({ name: 'sparky' });
-});
-
-app.get('/v1/pets/:id', function(req, res, next) {
-  res.json({ id: req.params.id, name: 'sparky' });
 });
 
 // 3. Create a custom error handler
