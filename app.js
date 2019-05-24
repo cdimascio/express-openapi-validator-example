@@ -7,6 +7,7 @@ var http = require('http');
 var OpenApiValidator = require('express-openapi-validator').OpenApiValidator;
 var app = express();
 
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,6 +21,21 @@ app.use('/spec', express.static(spec));
 new OpenApiValidator({
   apiSpecPath: './openapi.yaml',
 }).install(app);
+
+app.post('/v1/pets/:id/photos', function(req, res, next) {
+  // DO something with the file
+  // files are found in req.files
+  // non file multipar params are in req.body['my-param']
+  console.log(req.files);
+
+  res.json({
+    files_metadata: req.files.map(f => ({
+      originalname: f.originalname,
+      encoding: f.encoding,
+      mimetype: f.mimetype,
+    })),
+  });
+});
 
 // 2. Add routes
 app.get('/v1/pets', function(req, res, next) {
@@ -37,9 +53,19 @@ app.get('/v1/pets/:id', function(req, res, next) {
 // 3. Create a custom error handler
 app.use((err, req, res, next) => {
   // format error
-  res.status(err.status).json({
-    errors: err.errors,
-  });
+  if (!err.status && !err.errors) {
+    res.status(500).json({
+      errors: [
+        {
+          message: err.message,
+        },
+      ],
+    });
+  } else {
+    res.status(err.status).json({
+      errors: err.errors,
+    });
+  }
 });
 
 var server = http.createServer(app);
