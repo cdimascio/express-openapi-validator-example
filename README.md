@@ -101,7 +101,8 @@ curl --request POST \
 }
 ```
 
-File upload
+### File upload example
+
 ```shell
 curl -XPOST http://localhost:3000/v1/pets/10/photos -F file=@app.js|jq
 {
