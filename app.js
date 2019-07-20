@@ -66,6 +66,7 @@ app.use((err, req, res, next) => {
     });
   } else {
     res.status(err.status).json({
+      message: err.message,
       errors: err.errors,
     });
   }
