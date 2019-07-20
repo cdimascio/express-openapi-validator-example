@@ -29,14 +29,13 @@ The [express-openapi-validator](https://github.com/cdimascio/express-openapi-val
 ### Validate a query parameter with a value constraint
 
 ```shell
-curl http://localhost:3000/v1/pets/as |jq
+ccurl -s http://localhost:3000/v1/pets/as |jq
 {
   "errors": [
     {
-      "path": "id",
-      "errorCode": "type.openapi.validation",
+      "path": ".params.id",
       "message": "should be integer",
-      "location": "path"
+      "errorCode": "type.openapi.validation"
     }
   ]
 }
@@ -45,20 +44,18 @@ curl http://localhost:3000/v1/pets/as |jq
 ### Validate a query parameter with a range constraint
 
 ```shell
-curl http://localhost:3000/v1/pets?limit=1 |jq
+curl -s http://localhost:3000/v1/pets\?limit\=1 |jq
 {
   "errors": [
     {
-      "path": "limit",
-      "errorCode": "minimum.openapi.validation",
+      "path": ".query.limit",
       "message": "should be >= 5",
-      "location": "query"
+      "errorCode": "minimum.openapi.validation"
     },
     {
       "path": "test",
-      "errorCode": "required.openapi.validation",
       "message": "should have required property 'test'",
-      "location": "query"
+      "errorCode": "required.openapi.validation"
     }
   ]
 }
@@ -67,7 +64,7 @@ curl http://localhost:3000/v1/pets?limit=1 |jq
 ### Validate the query parameter's value type
 
 ```shell
-curl --request POST \
+curl -s --request POST \
   --url http://localhost:3000/v1/pets \
   --header 'content-type: application/xml' \
   --data '{
@@ -76,7 +73,8 @@ curl --request POST \
 {
   "errors": [
     {
-      "message": "Unsupported Content-Type application/xml"
+      "path": "/v1/pets",
+      "message": "unsupported media type application/xml"
     }
   ]
 }
@@ -85,17 +83,17 @@ curl --request POST \
 ### Validate a POST body to ensure required parameters are present
 
 ```shell
-λ  my-test curl --request POST \
+λ  curl -s --request POST \
   --url http://localhost:3000/v1/pets \
   --header 'content-type: application/json' \
   --data '{
 }'|jq
+{
   "errors": [
     {
       "path": "name",
-      "errorCode": "required.openapi.validation",
       "message": "should have required property 'name'",
-      "location": "body"
+      "errorCode": "required.openapi.validation"
     }
   ]
 }
