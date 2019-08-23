@@ -151,7 +151,7 @@ paths:
             schema:
               # $ref: '#/components/schemas/NewPhoto'
               type: object
-              required: 
+              required:
                 - file
               properties:
                 file:
@@ -173,6 +173,9 @@ paths:
 components:
   schemas:
     NewPet:
+      # additionalProperties: true
+      # additionalProperties:
+      #   type: string
       required:
         - name
       properties:
@@ -180,6 +183,8 @@ components:
           type: string
         tag:
           type: string
+        is_cat:
+          type: boolean
 
     Pet:
       allOf:
@@ -190,17 +195,16 @@ components:
             id:
               type: integer
               format: int64
-              
+
     NewPhoto:
       type: object
-      required: 
+      required:
         - file
       properties:
         file:
           description: The photo
           type: string
           format: binary
-
 
     Error:
       required:

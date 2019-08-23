@@ -70,7 +70,7 @@ curl -s --request POST \
   --data '{
         "name": "test"
 }' |jq
-{
+  "message": "unsupported media type application/xml",
   "errors": [
     {
       "path": "/v1/pets",
@@ -89,6 +89,7 @@ curl -s --request POST \
   --data '{
 }'|jq
 {
+  "message": "request.body should have required property 'name'",
   "errors": [
     {
       "path": "name",
