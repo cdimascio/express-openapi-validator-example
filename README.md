@@ -133,7 +133,7 @@ curl -XPOST http://localhost:3000/v1/pets |jq
 }
 ```
 
-with the api key and [security handler]()
+with the api key and [security handler](https://github.com/cdimascio/express-openapi-validator-example/blob/master/app.js#L24)
 
 ```shell
 curl -XPOST http://localhost:3000/v1/pets --header 'X-Api-Key: XXXXX' |jq
