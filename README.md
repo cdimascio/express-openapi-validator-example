@@ -115,6 +115,33 @@ curl -XPOST http://localhost:3000/v1/pets/10/photos -F file=@app.js|jq
 }
 ```
 
+### Validate security
+
+Using ApiKeyAuth
+
+```shell
+curl -XPOST http://localhost:3000/v1/pets |jq
+
+{
+  "message": "'X-API-Key' header required.",
+  "errors": [
+    {
+      "path": "/v1/pets",
+      "message": "'X-API-Key' header required."
+    }
+  ]
+}
+```
+
+with the api key and [security handler]()
+
+```shell
+curl -XPOST http://localhost:3000/v1/pets --header 'X-Api-Key: XXXXX' |jq
+{
+  "name": "sparky"
+}
+```
+
 ### ...and much more. Try it out!
 
 ## Fetch the spec
