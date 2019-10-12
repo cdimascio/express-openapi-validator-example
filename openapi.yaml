@@ -15,6 +15,18 @@ servers:
   - url: http://petstore.swagger.io/v1
 paths:
   /pets:
+    post:
+      description: Creates a new pet in the store.  Duplicates are allowed
+      operationId: addPet
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        description: Pet to add to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPet'
     get:
       description: |
         Returns all pets from the system that the user has access to
@@ -173,6 +185,11 @@ paths:
                     type: boolean
 
 components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
   schemas:
     NewPet:
       # additionalProperties: true

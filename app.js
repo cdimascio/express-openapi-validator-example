@@ -61,7 +61,6 @@ app.post('/v1/pets/:id/photos', function(req, res, next) {
 
 // 3. Create a custom error handler
 app.use((err, req, res, next) => {
-  console.error(err);
   // format error
   if (!err.status && !err.errors) {
     res.status(500).json({
