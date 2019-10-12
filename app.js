@@ -22,9 +22,7 @@ app.use('/spec', express.static(spec));
 new OpenApiValidator({
   apiSpec: './openapi.yaml',
   securityHandlers: {
-    ApiKeyAuth: (req, scopes, schema) => {
-      return true;
-    },
+    ApiKeyAuth: (req, scopes, schema) => true,
   },
 }).install(app);
 
