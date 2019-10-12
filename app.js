@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-vconstar bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const logger = require('morgan');
 const http = require('http');
 const OpenApiValidator = require('express-openapi-validator').OpenApiValidator;
 const app = express();
 
 app.use(bodyParser.urlencoded());
+app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,6 +21,11 @@ app.use('/spec', express.static(spec));
 // 1. Install the OpenApiValidator on your express app
 new OpenApiValidator({
   apiSpec: './openapi.yaml',
+  securityHandlers: {
+    ApiKeyAuth: (req, scopes, schema) => {
+      return true;
+    },
+  },
 }).install(app);
 
 // 2. Add routes
@@ -55,6 +61,7 @@ app.post('/v1/pets/:id/photos', function(req, res, next) {
 
 // 3. Create a custom error handler
 app.use((err, req, res, next) => {
+  console.error(err);
   // format error
   if (!err.status && !err.errors) {
     res.status(500).json({

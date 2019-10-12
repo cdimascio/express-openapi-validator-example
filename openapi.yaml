@@ -67,6 +67,8 @@ paths:
     post:
       description: Creates a new pet in the store.  Duplicates are allowed
       operationId: addPet
+      security:
+        - ApiKeyAuth: []
       requestBody:
         description: Pet to add to the store
         required: true
@@ -216,3 +218,9 @@ components:
           format: int32
         message:
           type: string
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
