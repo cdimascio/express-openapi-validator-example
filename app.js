@@ -10,6 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.text());
 app.use(bodyParser.json());
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
